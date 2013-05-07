@@ -80,6 +80,14 @@
       };
     },
 
+    crop: function(cropPosition){
+      this.cropX = cropPosition.x;
+      this.cropY = cropPosition.y;
+      this.cropWidth = cropPosition.width;
+      this.cropHeight = cropPosition.height;
+      
+    },
+
     /**
      * Renders image on a specified context
      * @param {CanvasRenderingContext2D} ctx Context to render on
@@ -290,6 +298,10 @@
     _render: function(ctx) {
       ctx.drawImage(
         this._element,
+        this.cropX,
+        this.cropY,
+        this.cropWidth,
+        this.cropHeight,
         -this.width / 2,
         -this.height / 2,
         this.width,
@@ -352,6 +364,19 @@
       this.height = 'height' in options
         ? options.height
         : (this.getElement().height || 0);
+      this.cropX = 'cropX' in options
+        ? options.cropX
+        : 0;
+      this.cropY = 'cropY' in options
+        ? options.cropY
+        : 0;
+      this.cropWidth = 'cropWidth' in options
+        ? options.cropWidth
+        : this.getElement().width
+
+      this.cropHeight = 'cropHeight' in options
+        ? options.cropHeight
+        : this.getElement().height
     },
 
     /**

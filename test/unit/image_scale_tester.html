@@ -1,0 +1,58 @@
+<html>
+<head>
+	<script src="../../dist/all.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+		var canvas, img;
+		var img_url ="http://farm9.staticflickr.com/8259/8710370910_d217f2f7e7_z.jpg"
+		$(function(){
+			reset();
+			$('#reset').click(reset);
+			$('#crop').click(crop);
+			$('#rotate').click(function(){
+				img.set('angle',15).setCoords()
+				canvas.renderAll()
+			})
+			$('#scale').click(function(){
+				img.scale(1.5).setCoords();
+				canvas.renderAll();
+			})
+			$('#border').click(function(){
+				img.set({ strokeWidth: 5, stroke: 'rgba(100,200,200,0.5)' });
+				canvas.renderAll();
+			})
+			$('#shadow').click(function(){
+				img.setShadow({ color: 'rgba(0,0,0,0.3)',offsetX:5,offsetY:5 });
+				canvas.renderAll();
+			})
+		})
+		var crop = function(){
+			canvas.crop(img, {x:50,y:50,width:200,height:200})
+		}
+		var reset = function(){
+			canvas = new fabric.Canvas("c")
+			new fabric.Image.fromURL(img_url,function(obj){
+				img = obj
+				canvas.add(obj);
+
+			},{top:400,left:400})
+		}
+	</script>
+
+
+</head>
+<body>
+	<div>
+	<button id="reset">Reset</button>
+	<button id="crop">Crop</button>
+	<button id="rotate">Rotate</button>
+	<button id="scale">Scale</button>
+	<button id="border">Border</border>
+	<button id="shadow">Shadow</button>
+</div>
+	<canvas id="c" width="800" height="800"></canvase>
+</body>
+
+
+
+</html>

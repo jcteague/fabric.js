@@ -151,6 +151,7 @@ var filesToInclude = [
   'src/path_group.class.js',
   'src/group.class.js',
   'src/image.class.js',
+  'src/crop.mixin.js',
 
   ifSpecifiedInclude('object_straightening', 'src/object_straightening.mixin.js'),
 
